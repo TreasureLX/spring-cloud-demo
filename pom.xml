@@ -12,7 +12,9 @@
     <artifactId>spring-cloud-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-cloud-demo</name>
+
     <description>Demo project for Spring Boot</description>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -24,8 +26,10 @@
         <module>spring-cloud-provider-eureka</module>
         <module>spring-cloud-provider-nacos</module>
         <module>spring-cloud-api-common</module>
-        <module>spring-cloud-config</module>
         <module>spring-cloud-config-apollo</module>
+        <module>spring-cloud-config-client</module>
+        <module>spring-cloud-config-nacos</module>
+        <module>spring-cloud-config-server</module>
     </modules>
 
     <dependencyManagement>
