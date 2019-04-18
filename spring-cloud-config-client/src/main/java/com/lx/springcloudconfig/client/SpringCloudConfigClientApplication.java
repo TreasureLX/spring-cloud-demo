@@ -1,7 +1,9 @@
 package com.lx.springcloudconfig.client;
 
+import com.lx.springcloudconfig.client.healthinfo.MyHealthIndicator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author lanxing
@@ -11,6 +13,11 @@ public class SpringCloudConfigClientApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCloudConfigClientApplication.class, args);
+    }
+
+    @Bean
+    public MyHealthIndicator myHealthIndicator(){
+        return new MyHealthIndicator();
     }
 
 }
