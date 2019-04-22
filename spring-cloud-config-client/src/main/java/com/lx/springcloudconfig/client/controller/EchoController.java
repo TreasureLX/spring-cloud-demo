@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RefreshScope  //适合用于开关、阈值和文案
 public class EchoController {
-    @Value("${myname}")
+    @Value("${my.name}")
     private String myName;
 
     @GetMapping("myName")
