@@ -30,6 +30,7 @@
         <module>spring-cloud-config-client</module>
         <module>spring-cloud-config-nacos</module>
         <module>spring-cloud-config-server</module>
+        <module>spring-cloud-provider-zookeeper</module>
     </modules>
 
     <dependencyManagement>
