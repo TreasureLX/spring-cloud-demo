@@ -16,10 +16,11 @@ import java.util.Map;
 @RestController
 public class ConfigSeverConfig {
 
-    private String value="lanxing";
+    private String value = "lanxing";
+
     @GetMapping("changeValue")
-    public String changeValue(String value){
-        this.value=value;
+    public String changeValue(String value) {
+        this.value = value;
         return value;
     }
 
@@ -28,11 +29,11 @@ public class ConfigSeverConfig {
         return new EnvironmentRepository() {
             @Override
             public Environment findOne(String application, String profile, String label) {
-                Environment environment=new Environment("lx",profile,"master",null,null);
-                List<PropertySource> list=environment.getPropertySources();
-                Map<String,Object> source=new HashMap<String,Object>();
-                source.put("my.name",value);
-                PropertySource propertySource=new PropertySource("map",source);
+                Environment environment = new Environment("lx", profile, "master", null, null);
+                List<PropertySource> list = environment.getPropertySources();
+                Map<String, Object> source = new HashMap<String, Object>();
+                source.put("my.name", value);
+                PropertySource propertySource = new PropertySource("map", source);
                 list.add(propertySource);
                 return environment;
             }
