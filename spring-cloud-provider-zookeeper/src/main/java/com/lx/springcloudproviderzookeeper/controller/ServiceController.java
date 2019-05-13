@@ -1,5 +1,8 @@
 package com.lx.springcloudproviderzookeeper.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +22,19 @@ public class ServiceController {
         return discoveryClient.getServices();
     }
 
+    @HystrixCommand(
+            fallbackMethod = "errorContent",
+            commandProperties = {
+                    @HystrixProperty(name = "",value = "00")
+            }
+    )
     @GetMapping("hello")
     public String hello(@RequestParam String msg) {
         System.out.println(msg);
         return "hello "+msg;
     }
 
+    public String errorContent(){
+        return "fail";
+    }
 }
