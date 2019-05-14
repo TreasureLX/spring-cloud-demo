@@ -31,6 +31,9 @@
         <module>spring-cloud-config-nacos</module>
         <module>spring-cloud-config-server</module>
         <module>spring-cloud-provider-zookeeper</module>
+        <module>spring-cloud-hystrix-dashboard</module>
+        <module>spring-cloud-consumer-custom</module>
+        <module>spring-cloud-config-zookeeper</module>
     </modules>
 
     <dependencyManagement>
