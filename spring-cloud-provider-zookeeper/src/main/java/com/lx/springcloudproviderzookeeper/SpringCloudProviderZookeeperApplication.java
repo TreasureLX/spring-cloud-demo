@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author lanxing
@@ -13,6 +14,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableDiscoveryClient
 //@EnableHystrix
 @EnableCircuitBreaker
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class SpringCloudProviderZookeeperApplication {
 
     public static void main(String[] args) {

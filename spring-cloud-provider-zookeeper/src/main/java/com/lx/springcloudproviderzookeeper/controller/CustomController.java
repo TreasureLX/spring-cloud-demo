@@ -63,6 +63,7 @@ public class CustomController {
 
     /**
      * 通过全局拦截器来实现熔断处理
+     *
      * @param msg
      * @return
      * @throws Exception
@@ -76,14 +77,30 @@ public class CustomController {
             after();
             return msg;
         });
-        String result=null;
-        try{
-            result=future.get(maxTime, TimeUnit.MILLISECONDS);
-        }catch (TimeoutException e){
+        String result = null;
+        try {
+            result = future.get(maxTime, TimeUnit.MILLISECONDS);
+        } catch (TimeoutException e) {
             future.cancel(true);
             throw e;
         }
         return result;
+    }
+
+    /**
+     * 通过注解的方式来实现低耦合的熔断
+     *
+     * @param msg
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("way4")
+    public String way4(String msg) throws Exception {
+        int time = random.nextInt(200);
+        before();
+        Thread.sleep(time);
+        after();
+        return msg;
     }
 
 
