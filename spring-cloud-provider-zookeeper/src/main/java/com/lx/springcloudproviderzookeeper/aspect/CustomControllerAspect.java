@@ -1,6 +1,6 @@
 package com.lx.springcloudproviderzookeeper.aspect;
 
-import com.lx.springcloudproviderzookeeper.annotation.CircuitBreaker;
+import com.lx.springcloudproviderzookeeper.annotation.TimeoutCircuitBreaker;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,17 +22,23 @@ public class CustomControllerAspect {
 
     @Around("execution(* com.lx.springcloudproviderzookeeper.controller.*.*(..))")
     public Object timeOutWay(ProceedingJoinPoint joinPoint) throws Throwable {
-        CircuitBreaker circuitBreaker = null;
+        TimeoutCircuitBreaker circuitBreaker = null;
         //1.获取切点方法
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        circuitBreaker = method.getAnnotation(CircuitBreaker.class);
-        //2.获取切点参数
+        //获取切点注解
+        circuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
+        //3.获取切点参数
         Object[] args = joinPoint.getArgs();
         Object returnValue = null;
-        //3.加了熔断注解
+        //4.获取切点对象
+        Object target=joinPoint.getTarget();
+        //5.根据是否加熔断注解来进行逻辑操作
         if (circuitBreaker != null) {
             long timeout = circuitBreaker.timeout();
+            //6.获取容错方法
+            String fallbackMethodName=circuitBreaker.fallbackMethod();
+            Method fallbackMethod= method.getDeclaringClass().getMethod(fallbackMethodName);
             Future<Object> future = executorService.submit(() -> {
                 Object obj = new Object();
                 try {
@@ -49,9 +55,9 @@ public class CustomControllerAspect {
             try {
                 returnValue = future.get(timeout, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
-                returnValue = errorContent();
+                future.cancel(true);
+                returnValue = fallbackMethod.invoke(target);
             }
-            //4.没加熔断注解
         } else {
             if (args.length > 0) {
                 returnValue = joinPoint.proceed(args);
@@ -60,10 +66,6 @@ public class CustomControllerAspect {
             }
         }
         return returnValue;
-    }
-
-    public String errorContent() {
-        return "fault";
     }
 
     @PreDestroy

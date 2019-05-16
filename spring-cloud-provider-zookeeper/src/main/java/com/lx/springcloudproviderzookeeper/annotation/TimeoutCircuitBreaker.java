@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface CircuitBreaker {
+public @interface TimeoutCircuitBreaker {
 
     /**
      * 超时时间

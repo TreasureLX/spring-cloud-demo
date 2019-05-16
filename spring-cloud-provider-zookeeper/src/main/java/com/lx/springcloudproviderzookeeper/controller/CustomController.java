@@ -1,6 +1,6 @@
 package com.lx.springcloudproviderzookeeper.controller;
 
-import com.lx.springcloudproviderzookeeper.annotation.CircuitBreaker;
+import com.lx.springcloudproviderzookeeper.annotation.TimeoutCircuitBreaker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -110,7 +110,7 @@ public class CustomController {
      * @return
      * @throws Exception
      */
-    @CircuitBreaker(timeout = 100)
+    @TimeoutCircuitBreaker(fallbackMethod = "errorContent",timeout = 100)
     @GetMapping("way5")
     public String way5(String msg) throws Exception {
         int time = random.nextInt(200);
@@ -119,8 +119,6 @@ public class CustomController {
         after();
         return msg;
     }
-
-
 
     private void before() {
         System.out.println("before");

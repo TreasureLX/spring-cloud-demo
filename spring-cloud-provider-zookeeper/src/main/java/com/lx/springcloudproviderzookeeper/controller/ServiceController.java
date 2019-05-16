@@ -31,14 +31,14 @@ public class ServiceController {
     @HystrixCommand(
             fallbackMethod = "errorContent",
             commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "100")
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
             }
     )
     @GetMapping("hello")
-    public String hello(@RequestParam String msg) throws InterruptedException {
+    public String hello(@RequestParam String msg) throws Exception {
         int time = random.nextInt(200);
         System.out.println("before");
-        Thread.sleep(time);
+        Thread.sleep(3000);
         System.out.println("after");
         return "hello " + msg;
     }
