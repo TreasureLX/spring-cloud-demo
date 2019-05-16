@@ -34,6 +34,7 @@
         <module>spring-cloud-hystrix-dashboard</module>
         <module>spring-cloud-consumer-custom</module>
         <module>spring-cloud-config-zookeeper</module>
+        <module>spring-cloud-consumer-feign-zookeeper</module>
     </modules>
 
     <dependencyManagement>
