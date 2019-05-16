@@ -1,5 +1,6 @@
 package com.lx.springcloudproviderzookeeper.controller;
 
+import com.lx.springcloudproviderzookeeper.annotation.CircuitBreaker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -102,6 +103,23 @@ public class CustomController {
         after();
         return msg;
     }
+
+    /**
+     * 通过AOP和注解高级实现
+     * @param msg
+     * @return
+     * @throws Exception
+     */
+    @CircuitBreaker(timeout = 100)
+    @GetMapping("way5")
+    public String way5(String msg) throws Exception {
+        int time = random.nextInt(200);
+        before();
+        Thread.sleep(time);
+        after();
+        return msg;
+    }
+
 
 
     private void before() {
