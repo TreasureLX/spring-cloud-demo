@@ -1,5 +1,6 @@
 package com.lx.springcloudproviderzookeeper.controller;
 
+import com.lx.springcloudproviderzookeeper.annotation.SemaphoreCircuitBreaker;
 import com.lx.springcloudproviderzookeeper.annotation.TimeoutCircuitBreaker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -116,6 +117,15 @@ public class CustomController {
         int time = random.nextInt(200);
         before();
         Thread.sleep(time);
+        after();
+        return msg;
+    }
+
+    @SemaphoreCircuitBreaker(fallbackMethod = "errorContent",value = 2)
+    @GetMapping("way6")
+    public String way6(String msg) throws Exception {
+        before();
+        Thread.sleep(1000);
         after();
         return msg;
     }
