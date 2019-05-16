@@ -2,6 +2,9 @@ package com.lx.springcloudproviderzookeeper.controller;
 
 import com.lx.springcloudproviderzookeeper.annotation.SemaphoreCircuitBreaker;
 import com.lx.springcloudproviderzookeeper.annotation.TimeoutCircuitBreaker;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +16,7 @@ import java.util.concurrent.*;
  */
 @RestController
 public class CustomController {
+    private static final Log logger = LogFactory.getLog(SpringApplication.class);
 
     private static final ExecutorService executorService = Executors.newFixedThreadPool(5);
     private static final Random random = new Random();
@@ -125,17 +129,17 @@ public class CustomController {
     @GetMapping("way6")
     public String way6(String msg) throws Exception {
         before();
-        Thread.sleep(1000);
+//        Thread.sleep(15000000);
         after();
         return msg;
     }
 
     private void before() {
-        System.out.println("before");
+        logger.info("before");
     }
 
     private void after() {
-        System.out.println("after");
+        logger.info("after");
     }
 
     public String errorContent() {
