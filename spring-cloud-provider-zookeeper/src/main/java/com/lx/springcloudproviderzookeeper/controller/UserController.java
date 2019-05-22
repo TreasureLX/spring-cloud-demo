@@ -14,6 +14,7 @@ public class UserController implements UserService {
         User user=new User();
         user.setName("lanxing");
         user.setAge(24);
+        System.out.println("hint");
         return user;
     }
 }
