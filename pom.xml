@@ -36,6 +36,7 @@
         <module>spring-cloud-config-zookeeper</module>
         <module>spring-cloud-consumer-feign-zookeeper</module>
         <module>spring-cloud-consumer-ribbon-zookeeper</module>
+        <module>spring-cloud-zookeeper-api</module>
     </modules>
 
     <dependencyManagement>
