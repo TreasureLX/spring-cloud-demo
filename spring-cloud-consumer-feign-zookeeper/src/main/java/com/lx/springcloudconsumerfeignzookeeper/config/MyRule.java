@@ -1,5 +1,6 @@
 package com.lx.springcloudconsumerfeignzookeeper.config;
 
+import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.*;
 
 import java.util.List;
@@ -7,23 +8,16 @@ import java.util.List;
 /**
  * @author lanxing
  */
-public class MyRule extends AbstractLoadBalancer {
-
-
-
-    @Override
-    public Server chooseServer(Object key) {
-        return null;
-    }
+public class MyRule extends AbstractLoadBalancerRule {
 
 
     @Override
-    public List<Server> getServerList(ServerGroup serverGroup) {
-        return null;
+    public void initWithNiwsConfig(IClientConfig iClientConfig) {
+
     }
 
     @Override
-    public LoadBalancerStats getLoadBalancerStats() {
+    public Server choose(Object key) {
         return null;
     }
 }
