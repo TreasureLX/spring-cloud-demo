@@ -18,6 +18,7 @@ public class MyRule extends AbstractLoadBalancerRule {
 
     @Override
     public Server choose(Object key) {
-        return null;
+        List<Server> list=getLoadBalancer().getAllServers();
+        return list.get(0);
     }
 }
