@@ -1,7 +1,8 @@
 package com.lx.springcloudconsumerfeignzookeeper.config;
 
 import com.netflix.client.config.IClientConfig;
-import com.netflix.loadbalancer.*;
+import com.netflix.loadbalancer.AbstractLoadBalancerRule;
+import com.netflix.loadbalancer.Server;
 
 import java.util.List;
 
