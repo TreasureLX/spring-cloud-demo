@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController implements UserService {
 
     @GetMapping("getUser")
-    @Override
     public User getUser() {
         User user=new User();
         user.setName("lanxing");
